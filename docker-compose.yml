@@ -1,0 +1,17 @@
+services:
+  source_db:
+    image: mongo:6.0
+    ports:
+      - 27017:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=root
+    container_name: mongo-source
+
+  target_db:
+    image: timescale/timescaledb:latest-pg13
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=root
+    container_name: pg-target
