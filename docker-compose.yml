@@ -8,6 +8,8 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=root
     container_name: mongo-source
 
+  # Railway uses the timescaledb image.
+  # See: https://docs.railway.app/databases/postgresql#image.
   target_db:
     image: timescale/timescaledb:latest-pg13
     ports:
