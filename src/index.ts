@@ -92,16 +92,6 @@ async function createTargetUser(user: SourceUser): Promise<string> {
             data: user.accounts.map(({ id, userId, ...a }) => a), // Account model is the same.
           },
         },
-        credit: {
-          createMany: {
-            data: user.credit.map((c) => ({
-              courseCode: c.courseCode,
-              semester: c.semesterCode.semester,
-              year: c.semesterCode.year,
-              transfer: c.transfer,
-            })),
-          },
-        },
         sessions: {
           createMany: {
             data: user.sessions.map(({ userId, id, ...session }) => session), // Session model is the same
@@ -147,6 +137,7 @@ async function createTargetPlan(
         startYear: sourcePlan.startSemester.year,
         endSemester: sourcePlan.endSemester.semester,
         endYear: sourcePlan.endSemester.year,
+        transferCredits: sourcePlan.transferCredits,
         requirements:
           sourcePlan.requirements !== null
             ? {
